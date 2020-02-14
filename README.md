@@ -10,7 +10,7 @@ Create the `sensu-stackdriver` namespace.
 kubectl apply -f kube/namespace.yml
 ```
 
-Create the `stackdriver` secret containing the Google Stackdriver project id.
+Create the `stackdriver` secret containing the Google Stackdriver project id. Be sure to change `CHANGEME`!
 
 ```
 kubectl create secret generic stackdriver --from-literal=project-id='CHANGEME' --namespace sensu-stackdriver
