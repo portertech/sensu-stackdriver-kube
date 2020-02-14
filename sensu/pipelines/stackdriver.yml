@@ -1,0 +1,33 @@
+---
+type: Asset
+api_version: core/v2
+metadata:
+  name: sensu-stackdriver-handler
+spec:
+  url: https://assets.bonsai.sensu.io/53222cbb9f04a3c9dae6683cf86e0bfcfa0e51cb/sensu-stackdriver-handler_1.0.1_linux_amd64.tar.gz
+  sha512: fe614a8f3ccf2e422d255a1d88a6682f78b7440ded5bbfb34d714e40bfe9bbf7cfd49c7ee61345ce9c9a46bb4adcc180677a0b914d2e2b2faf34105e47213a4e
+---
+type: Secret
+api_version: secrets/v1
+metadata:
+  name: stackdriver-project-id
+  namespace: default
+spec:
+  id: STACKDRIVER_PROJECT_ID
+  provider: env
+---
+type: Handler
+api_version: core/v2
+metadata:
+  name: stackdriver
+spec:
+  type: pipe
+  runtime_assets:
+    - sensu-stackdriver-handler
+  secrets:
+    - name: STACKDRIVER_PROJECT_ID
+      secret: stackdriver-project-id
+  command: sensu-stackdriver-handler -p $STACKDRIVER_PROJECT_ID
+  timeout: 10
+  filters:
+    - has_metrics
