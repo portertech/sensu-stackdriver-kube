@@ -26,6 +26,12 @@ kubectl get pods --namespace sensu-stackdriver
 kubectl get services --namespace sensu-stackdriver
 ```
 
+Deploy the demo web application.
+
+```
+kubectl apply -f kube/sensu.yml
+```
+
 ## Workstation Setup
 
 [Install sensuctl](https://docs.sensu.io/sensu-go/latest/installation/install-sensu/#install-sensuctl).
