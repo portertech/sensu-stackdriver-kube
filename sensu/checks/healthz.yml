@@ -1,0 +1,40 @@
+---
+type: Asset
+api_version: core/v2
+metadata:
+  name: sensu/monitoring-plugins
+  labels:
+  annotations:
+    io.sensu.bonsai.url: https://bonsai.sensu.io/assets/sensu/monitoring-plugins
+    io.sensu.bonsai.api_url: https://bonsai.sensu.io/api/v1/assets/sensu/monitoring-plugins
+    io.sensu.bonsai.tier: Community
+    io.sensu.bonsai.version: 2.3.0
+    io.sensu.bonsai.namespace: sensu
+    io.sensu.bonsai.name: monitoring-plugins
+    io.sensu.bonsai.tags: dns, http, ntp, ping, procs, smtp, ssh, swap, tcp, time,
+      users
+spec:
+  builds:
+  - url: https://assets.bonsai.sensu.io/e9238fb4acff268d24799866c3241751ea6fdf32/monitoring-plugins-alpine_2.3.0_linux_amd64.tar.gz
+    sha512: 6a54663d61c413a8d2b21ffad3c0def5b1e7eaeb6ddf4e3c3692e39b88fe558cba8c5430d86915a34146e8f94118b8ab9d8b41ed0ba32ecb55d352f2e9b56ad9
+    filters:
+    - entity.system.os == 'linux'
+    - entity.system.platform == 'alpine'
+    - entity.system.arch == 'amd64'
+---
+type: CheckConfig
+api_version: core/v2
+metadata:
+  name: healthz
+spec:
+  command: check_http -H 127.0.0.1 -p 8080 -u /healthz
+  interval: 10
+  output_metric_format: nagios_perfdata
+  output_metric_handlers:
+  - stackdriver
+  runtime_assets:
+  - sensu/monitoring-plugins
+  subscriptions:
+  - web
+  timeout: 5
+  publish: true
