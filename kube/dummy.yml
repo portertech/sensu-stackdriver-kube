@@ -39,6 +39,8 @@ spec:
               value: "true"
             - name: SENSU_STATSD_EVENT_HANDLERS
               value: statsd
+            - name: SENSU_LABELS
+              value: "app=dummy"
 ---
 apiVersion: v1
 kind: Service
