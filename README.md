@@ -29,7 +29,7 @@ kubectl get services --namespace sensu-stackdriver
 Deploy the demo web application.
 
 ```
-kubectl apply -f kube/sensu.yml
+kubectl apply -f kube/dummy.yml
 ```
 
 ## Workstation Setup
@@ -39,5 +39,5 @@ kubectl apply -f kube/sensu.yml
 ## Monitoring
 
 ```
-sensuctl create -f sensu/
+sensuctl create -r -f sensu/
 ```
