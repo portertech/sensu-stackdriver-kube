@@ -20,16 +20,20 @@ Deploy the Sensu cluster.
 
 ```
 kubectl apply -f kube/sensu.yml
-
-kubectl get pods --namespace sensu-stackdriver
-
-kubectl get services --namespace sensu-stackdriver
 ```
 
 Deploy the demo web application.
 
 ```
 kubectl apply -f kube/dummy.yml
+```
+
+List pods and services.
+
+```
+kubectl get pods --namespace sensu-stackdriver
+
+kubectl get services --namespace sensu-stackdriver
 ```
 
 ## Workstation Setup
