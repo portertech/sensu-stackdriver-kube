@@ -8,14 +8,14 @@ metadata:
     io.sensu.bonsai.url: https://bonsai.sensu.io/assets/portertech/sensu-stackdriver-handler
     io.sensu.bonsai.api_url: https://bonsai.sensu.io/api/v1/assets/portertech/sensu-stackdriver-handler
     io.sensu.bonsai.tier: Community
-    io.sensu.bonsai.version: 1.0.1
+    io.sensu.bonsai.version: 1.1.0
     io.sensu.bonsai.namespace: portertech
     io.sensu.bonsai.name: sensu-stackdriver-handler
     io.sensu.bonsai.tags: ''
 spec:
   builds:
-  - url: https://assets.bonsai.sensu.io/53222cbb9f04a3c9dae6683cf86e0bfcfa0e51cb/sensu-stackdriver-handler_1.0.1_linux_amd64.tar.gz
-    sha512: fe614a8f3ccf2e422d255a1d88a6682f78b7440ded5bbfb34d714e40bfe9bbf7cfd49c7ee61345ce9c9a46bb4adcc180677a0b914d2e2b2faf34105e47213a4e
+  - url: https://assets.bonsai.sensu.io/556e05196195986da75f62ad3d875c9c7e49602c/sensu-stackdriver-handler_1.1.0_linux_amd64.tar.gz
+    sha512: a1003469409a30b97b56b38eea7dd671800f51156ca37975560039dfd10bc56584b19475d950f07db21eb7f24d32aad8add3f0fcccbf7806920678066c847cfb
     filters:
     - entity.system.os == 'linux'
     - entity.system.arch == 'amd64'
@@ -36,11 +36,11 @@ metadata:
 spec:
   type: pipe
   runtime_assets:
-    - portertech/sensu-stackdriver-handler
+  - portertech/sensu-stackdriver-handler
   secrets:
-    - name: STACKDRIVER_PROJECT_ID
-      secret: stackdriver-project-id
+  - name: STACKDRIVER_PROJECT_ID
+    secret: stackdriver-project-id
   command: sensu-stackdriver-handler -p $STACKDRIVER_PROJECT_ID
   timeout: 10
   filters:
-    - has_metrics
+  - has_metrics

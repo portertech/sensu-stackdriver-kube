@@ -1,0 +1,38 @@
+---
+type: Asset
+api_version: core/v2
+metadata:
+  name: sensu/sensu-prometheus-collector
+  labels:
+  annotations:
+    io.sensu.bonsai.url: https://bonsai.sensu.io/assets/sensu/sensu-prometheus-collector
+    io.sensu.bonsai.api_url: https://bonsai.sensu.io/api/v1/assets/sensu/sensu-prometheus-collector
+    io.sensu.bonsai.tier: Supported
+    io.sensu.bonsai.version: 1.3.1
+    io.sensu.bonsai.namespace: sensu
+    io.sensu.bonsai.name: sensu-prometheus-collector
+    io.sensu.bonsai.tags: check
+spec:
+  builds:
+  - url: https://assets.bonsai.sensu.io/0d7e6d1b819e51257841a0db4c9fbe587a07d9d4/sensu-prometheus-collector_1.3.1_linux_amd64.tar.gz
+    sha512: 100e2dd2f08eb1f2779e34eb45c9a5a8a9ca79c2ceddc29a2989d8d6d55a12f0e38446316f3a5f281b78c42892ecafc3a42b4fb4b43212e5c64007f7e119b12d
+    filters:
+    - entity.system.os == 'linux'
+    - entity.system.arch == 'amd64'
+---
+api_version: core/v2
+type: CheckConfig
+metadata:
+  name: prometheus
+spec:
+  runtime_assets:
+  - sensu/sensu-prometheus-collector
+  command: sensu-prometheus-collector -exporter-url http://localhost:8080/metrics
+  interval: 10
+  output_metric_format: influxdb_line
+  output_metric_handlers:
+  - stackdriver
+  discard_output: true
+  subscriptions:
+  - web
+  publish: true
